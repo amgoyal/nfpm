@@ -718,6 +718,9 @@ Section: {{.Info.Section}}
 Priority: {{.Info.Priority}}
 Architecture: {{ if ne .Info.Platform "linux"}}{{ .Info.Platform }}-{{ end }}{{.Info.Arch}}
 {{- /* Optional fields */ -}}
+{{- if .Info.Deb.MultiArch}}
+Multi-Arch: {{.Info.Deb.MultiArch}}
+{{- end }}
 {{- if .Info.Maintainer}}
 Maintainer: {{.Info.Maintainer}}
 {{- end }}

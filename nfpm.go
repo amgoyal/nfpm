@@ -265,6 +265,7 @@ func (c *Config) expandEnvVars() {
 	c.Info.RPM.Packager = os.Expand(c.RPM.Packager, c.envMappingFunc)
 
 	// Deb specific
+	c.Info.Deb.MultiArch = os.Expand(c.Info.Deb.MultiArch, c.envMappingFunc)
 	for k, v := range c.Info.Deb.Fields {
 		c.Info.Deb.Fields[k] = os.Expand(v, c.envMappingFunc)
 	}
@@ -437,6 +438,7 @@ type Deb struct {
 	Compression string            `yaml:"compression,omitempty" json:"compression,omitempty" jsonschema:"title=compression algorithm to be used,enum=gzip,enum=xz,enum=none,default=gzip"`
 	Fields      map[string]string `yaml:"fields,omitempty" json:"fields,omitempty" jsonschema:"title=fields"`
 	Predepends  []string          `yaml:"predepends,omitempty" json:"predepends,omitempty" jsonschema:"title=predepends directive,example=nfpm"`
+	MultiArch   string            `yaml:"multi_arch,omitempty" json:"multi_arch,omitempty" jsonschema:"title=co-installable, enum=no,enum=same,enum=foreign,enum=allowed,default=no"`
 }
 
 type DebSignature struct {
